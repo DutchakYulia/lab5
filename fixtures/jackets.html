@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Men Jackets - Lab Store</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: #1f2937;
+        background: #f6f7f9;
+      }
+
+      main {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 32px 20px;
+      }
+
+      h1 {
+        margin: 0 0 20px;
+        font-size: 32px;
+      }
+
+      .toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .filters {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      .products-grid .product-items {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      .product-item {
+        min-height: 140px;
+        padding: 18px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        background: #fff;
+      }
+
+      .product-item strong {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .price {
+        font-weight: 700;
+        color: #0f766e;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Men Jackets</h1>
+
+      <section class="toolbar" aria-label="Product toolbar">
+        <p class="toolbar-amount">
+          Items <span class="toolbar-number">1</span>-<span class="toolbar-number">5</span> of
+          <span class="toolbar-number">5</span>
+        </p>
+
+        <label>
+          Sort by
+          <select class="sorter-options" aria-label="Sort products">
+            <option value="position">Position</option>
+            <option value="price">Price</option>
+            <option value="name">Name</option>
+          </select>
+        </label>
+      </section>
+
+      <aside class="filters" aria-label="Filters">
+        <label><input type="checkbox" name="size" value="m"> M</label>
+        <label><input type="checkbox" name="size" value="l"> L</label>
+        <label><input type="checkbox" name="color" value="black"> Black</label>
+      </aside>
+
+      <section class="products-grid" aria-label="Products">
+        <ul class="product-items">
+          <li class="product-item" data-price="79.00" data-name="Proteus Fitness Jackshirt">
+            <strong>Proteus Fitness Jackshirt</strong>
+            <span class="price">$79.00</span>
+          </li>
+          <li class="product-item" data-price="45.00" data-name="Montana Wind Jacket">
+            <strong>Montana Wind Jacket</strong>
+            <span class="price">$45.00</span>
+          </li>
+          <li class="product-item" data-price="68.00" data-name="Lando Gym Jacket">
+            <strong>Lando Gym Jacket</strong>
+            <span class="price">$68.00</span>
+          </li>
+          <li class="product-item" data-price="56.00" data-name="Kenobi Trail Jacket">
+            <strong>Kenobi Trail Jacket</strong>
+            <span class="price">$56.00</span>
+          </li>
+          <li class="product-item" data-price="99.00" data-name="Orion Shell Jacket">
+            <strong>Orion Shell Jacket</strong>
+            <span class="price">$99.00</span>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <script>
+      const sorter = document.querySelector('.sorter-options');
+      const productList = document.querySelector('.product-items');
+
+      sorter.addEventListener('change', () => {
+        const products = [...productList.querySelectorAll('.product-item')];
+        const field = sorter.value;
+
+        if (field === 'price') {
+          products.sort((left, right) => Number(left.dataset.price) - Number(right.dataset.price));
+        }
+
+        if (field === 'name') {
+          products.sort((left, right) => left.dataset.name.localeCompare(right.dataset.name));
+        }
+
+        products.forEach((product) => productList.appendChild(product));
+      });
+    </script>
+  </body>
+</html>
